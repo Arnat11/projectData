@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="th" class="admin-page">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>จัดการร้าน | Airify Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Noto+Sans+Thai:wght@400..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/store.css">
+    <script src="./admin.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#admin-main">ข้ามไปที่เนื้อหา</a>
+    <header class="topbar">
+      <div class="wrap topbar-inner admin-topbar">
+        <a class="brand" href="./" aria-label="Airify Store หน้าแรก">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 8h11a3 3 0 1 0-3-3M2 12h17a3 3 0 1 0-3-3M4 16h9a3 3 0 1 1-3 3"></path></svg>
+          <span>Airify <span class="brand-sub">Store</span></span>
+        </a>
+        <nav aria-label="เมนูผู้ดูแล"><a href="./">กลับหน้าร้าน</a></nav>
+      </div>
+    </header>
+    <main class="wrap admin-main" id="admin-main">
+      <section class="login-panel" id="login-section" aria-labelledby="login-title">
+        <h1 id="login-title">เข้าสู่ระบบผู้ดูแล</h1>
+        <p class="muted">เข้าสู่ระบบเพื่อจัดการสินค้า ราคา และสต็อก</p>
+        <form class="form-stack" id="login-form">
+          <label for="username">ชื่อผู้ใช้<input id="username" name="username" autocomplete="username" required></label>
+          <label class="password-field" for="password">รหัสผ่าน
+            <span class="password-input"><input id="password" name="password" type="password" autocomplete="current-password" required><button class="password-toggle" id="password-toggle" type="button" aria-label="แสดงรหัสผ่าน" title="แสดงรหัสผ่าน"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg></button></span>
+          </label>
+          <button class="button button-primary full" type="submit">เข้าสู่ระบบ</button>
+        </form>
+      </section>
+      <p class="notice-inline error" id="login-message" role="alert" hidden></p>
+      <section class="admin-dashboard" id="admin-dashboard" hidden>
+        <div class="inventory-head"><div><h1>จัดการร้าน</h1><p class="muted" id="admin-name"></p></div><button class="button button-quiet" id="logout" type="button">ออกจากระบบ</button></div>
+        <nav class="admin-nav" aria-label="เมนูจัดการร้าน"><a href="#inventory">สินค้า</a><a href="#orders-section">คำสั่งซื้อ</a></nav>
+        <div class="admin-layout">
+          <section id="inventory" aria-labelledby="inventory-title">
+            <div class="inventory-head"><div><h2 id="inventory-title">สินค้าในร้าน</h2><p class="muted" id="inventory-count"></p></div><button class="button button-primary" id="add-product" type="button">เพิ่มสินค้า</button></div>
+            <div class="inventory-list" id="inventory-list"></div>
+          </section>
+          <section class="editor" id="product-editor" hidden aria-labelledby="editor-title">
+            <div class="inventory-head"><h2 id="editor-title">เพิ่มสินค้า</h2><button class="button button-quiet" id="cancel-edit" type="button">ปิด</button></div>
+            <form class="form-stack" id="product-form">
+              <input type="hidden" name="id">
+              <label>ชื่อสินค้า<input name="name" maxlength="120" required></label>
+              <label>หมวดหมู่<select name="category" required><option value="purifiers">เครื่องฟอกอากาศ</option><option value="filters">ไส้กรองอากาศ</option><option value="monitors">เครื่องวัดคุณภาพอากาศ</option><option value="accessories">อุปกรณ์เสริม</option></select></label>
+              <div class="form-pair"><label>ราคา (บาท)<input name="price" type="number" min="0" step="1" required></label><label>สต็อก<input name="stock" type="number" min="0" step="1" required></label></div>
+              <label>รายละเอียดสั้น<input name="spec" maxlength="240"></label>
+              <label>รายละเอียดสินค้า<textarea name="description" rows="3" maxlength="2000"></textarea></label>
+              <label>รูปภาพ (URL หรือ sprite)<input name="image" placeholder="https://... หรือ sprite:0% 0%" required></label>
+              <div id="image-preview" aria-live="polite"></div>
+              <p class="notice-inline" id="form-message" role="alert" hidden></p>
+              <button class="button button-primary full" type="submit">บันทึกสินค้า</button>
+            </form>
+          </section>
+        </div>
+        <section class="orders-section" id="orders-section"><h2>คำสั่งซื้อล่าสุด</h2><div id="orders-list"></div></section>
+      </section>
+    </main>
+  </body>
+</html>
